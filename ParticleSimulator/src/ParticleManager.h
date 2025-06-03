@@ -6,6 +6,10 @@
 
 struct Particle {
     Vector2 position;
+    int cellX;
+    int cellY;
+    bool processed;
+    Color color;
 };
 
 class ParticleManager {
@@ -18,6 +22,12 @@ public:
     void draw();
 
 private:
-    std::vector<Particle>
-        m_particles;
+    int getCellY(Vector2 position);
+    Color getRandomColor();
+
+    std::vector<Particle> m_particles;
+    std::vector<std::vector<bool>> m_occupied;
+
+    int m_gridWidth;
+    int m_gridHeight;
 };

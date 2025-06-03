@@ -5,11 +5,14 @@
 
 void handleInput(ParticleManager& particleManager)
 {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         Vector2 mousePosition = GetMousePosition();
 
         int cellX = mousePosition.x / config::cellSize;
         int cellY = mousePosition.y / config::cellSize;
+
+        if (cellX < 0 || cellY < 0 || cellX > config::screenWidth / config::cellSize - 1 || cellY > config::screenHeight / config::cellSize - 1)
+            return;
 
         particleManager.spawnParticle(cellX, cellY);
 
@@ -20,6 +23,7 @@ void handleInput(ParticleManager& particleManager)
 void update(float dt, ParticleManager& particleManager)
 {
     handleInput(particleManager);
+    particleManager.update(dt);
 }
 
 void drawGrid(const int gridWidth, const int gridHeight)

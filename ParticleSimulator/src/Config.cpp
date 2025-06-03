@@ -22,6 +22,7 @@ bool config::load(const std::string& configPath)
     screenHeight = data["screen_height"];
     maxFps = data["max_fps"];
     cellSize = data["cell_size"];
+    deltaY = data["delta_y"];
 
     return true;
 }
