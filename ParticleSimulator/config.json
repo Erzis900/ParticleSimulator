@@ -1,0 +1,6 @@
+{
+    "screen_width": 800,
+    "screen_height": 800,
+    "max_fps": 60,
+    "cell_size": 32
+}
