@@ -27,6 +27,10 @@ void ParticleManager::spawnParticle(ParticleType type, int cellX, int cellY)
     case ParticleType::WATER:
         p.color = BLUE;
         break;
+    case ParticleType::SOLID:
+        p.color = GRAY;
+        p.processed = true;
+        break;
     }
 
     m_particles.push_back(p);

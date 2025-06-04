@@ -6,7 +6,8 @@
 
 enum class ParticleType {
     SAND,
-    WATER
+    WATER,
+    SOLID
 };
 
 struct Particle {

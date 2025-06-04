@@ -5,7 +5,7 @@
 
 void handleInput(ParticleManager& particleManager)
 {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT) || IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)) {
         Vector2 mousePosition = GetMousePosition();
 
         int cellX = mousePosition.x / config::cellSize;
@@ -14,7 +14,15 @@ void handleInput(ParticleManager& particleManager)
         if (cellX < 0 || cellY < 0 || cellX > config::screenWidth / config::cellSize - 1 || cellY > config::screenHeight / config::cellSize - 1)
             return;
 
-        ParticleType type = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? ParticleType::SAND : ParticleType::WATER;
+        ParticleType type;
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            type = ParticleType::SAND;
+        } else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+            type = ParticleType::WATER;
+        } else if (IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)) {
+            type = ParticleType::SOLID;
+        }
+
         particleManager.spawnParticle(type, cellX, cellY);
     }
 }
