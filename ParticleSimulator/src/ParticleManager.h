@@ -5,7 +5,6 @@
 #include <vector>
 
 struct Particle {
-    Vector2 position;
     int cellX;
     int cellY;
     bool processed;
@@ -22,12 +21,11 @@ public:
     void draw();
 
 private:
-    int getCellY(Vector2 position);
-    Color getRandomColor();
-
     std::vector<Particle> m_particles;
     std::vector<std::vector<bool>> m_occupied;
 
     int m_gridWidth;
     int m_gridHeight;
+
+    Color getRandomColor();
 };

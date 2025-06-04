@@ -15,7 +15,6 @@ void ParticleManager::spawnParticle(int cellX, int cellY)
         return;
 
     Particle p;
-    p.position = { float(cellX) * config::cellSize, float(cellY) * config::cellSize };
     p.cellX = cellX;
     p.cellY = cellY;
     p.processed = false;
@@ -28,41 +27,26 @@ void ParticleManager::spawnParticle(int cellX, int cellY)
 void ParticleManager::update(float dt)
 {
     for (auto& p : m_particles) {
-        if (p.processed)
-            continue;
+        if (!p.processed) {
+            if (p.cellY == m_gridHeight - 1 || m_occupied[p.cellX][p.cellY + 1]) {
+                p.processed = true;
+                continue;
+            }
 
-        int cellY = getCellY(p.position);
-
-        if (p.cellY != cellY) {
-            m_occupied[p.cellX][p.cellY] = false;
-            m_occupied[p.cellX][cellY] = true;
-
-            p.cellY = cellY;
+            if (!m_occupied[p.cellX][p.cellY + 1]) {
+                p.cellY++;
+                m_occupied[p.cellX][p.cellY] = true;
+                m_occupied[p.cellX][p.cellY - 1] = false;
+            }
         }
-
-        if (cellY + 1 == m_gridHeight) {
-            p.processed = true;
-            continue;
-        }
-
-        if (m_occupied[p.cellX][p.cellY + 1]) {
-            continue;
-        }
-
-        p.position.y += config::deltaY * dt;
     }
 }
 
 void ParticleManager::draw()
 {
     for (auto& p : m_particles) {
-        DrawRectangleV(p.position, { float(config::cellSize), float(config::cellSize) }, p.color);
+        DrawRectangle(p.cellX * config::cellSize, p.cellY * config::cellSize, config::cellSize, config::cellSize, p.color);
     }
-}
-
-int ParticleManager::getCellY(Vector2 position)
-{
-    return position.y / config::cellSize;
 }
 
 Color ParticleManager::getRandomColor()
