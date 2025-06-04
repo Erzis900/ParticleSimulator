@@ -8,7 +8,6 @@ struct Particle {
     int cellX;
     int cellY;
     bool processed;
-    Color color;
 };
 
 class ParticleManager {
@@ -26,6 +25,4 @@ private:
 
     int m_gridWidth;
     int m_gridHeight;
-
-    Color getRandomColor();
 };

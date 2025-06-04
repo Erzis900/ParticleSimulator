@@ -28,12 +28,13 @@ void update(float dt, ParticleManager& particleManager)
 
 void drawGrid(const int gridWidth, const int gridHeight)
 {
+    Color c = GRAY;
     for (int i = 1; i < gridWidth; i++) {
-        DrawLine(i * config::cellSize, 0, i * config::cellSize, config::screenHeight, DARKGREEN);
+        DrawLine(i * config::cellSize, 0, i * config::cellSize, config::screenHeight, c);
     }
 
     for (int j = 1; j < gridHeight; j++) {
-        DrawLine(0, j * config::cellSize, config::screenWidth, j * config::cellSize, DARKGREEN);
+        DrawLine(0, j * config::cellSize, config::screenWidth, j * config::cellSize, c);
     }
 }
 

@@ -1,7 +1,7 @@
 {
     "screen_width": 800,
     "screen_height": 800,
-    "max_fps": 30,
+    "max_fps": 120,
 
-    "cell_size": 32
+    "cell_size": 8
 }
