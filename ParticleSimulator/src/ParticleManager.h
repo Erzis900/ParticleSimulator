@@ -4,17 +4,24 @@
 #include <raylib.h>
 #include <vector>
 
+enum class ParticleType {
+    SAND,
+    WATER
+};
+
 struct Particle {
     int cellX;
     int cellY;
     bool processed;
+    ParticleType type;
+    Color color;
 };
 
 class ParticleManager {
 public:
     ParticleManager(const int gridWidth, const int gridHeight);
 
-    void spawnParticle(int cellX, int cellY);
+    void spawnParticle(ParticleType type, int cellX, int cellY);
 
     void update(float dt);
     void draw();
